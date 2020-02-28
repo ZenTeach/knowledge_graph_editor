@@ -1,0 +1,15 @@
+neo4j: &neo4j
+  type: http
+  url: http://neo4j:neo4jlocalhost:7474
+
+
+development:
+  <<: *neo4j
+
+test:
+  <<: *neo4j
+  url: http://localhost:7575
+
+production:
+  type: http
+  url: ENV.fetch("NEO4J_URL")

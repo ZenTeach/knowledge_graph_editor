@@ -9,28 +9,28 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
-### Rails ###
-*.rbc
-capybara-*.html
-.rspec
-/db/*.sqlite3
-/db/*.sqlite3-journal
-/public/system
-/coverage/
-/spec/tmp
-*.orig
-rerun.txt
-pickle-email-*.html
+### Rails ##
+backend/*.rbc
+backend/capybara-*.html
+backend/.rspec
+backend/db/*.sqlite3
+backend/db/*.sqlite3-journal
+backend/public/system
+backend/coverage/
+backend/spec/tmp
+backend/*.orig
+backend/rerun.txt
+backend/pickle-email-*.html
 
 # Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
+backend/log/*
+backend/tmp/*
+!backend/log/.keep
+!backend/tmp/.keep
 
 # TODO Comment out this rule if you are OK with secrets being uploaded to the repo
-config/initializers/secret_token.rb
-config/master.key
+backend/config/initializers/secret_token.rb
+backend/config/master.key
 
 # Only include if you have production secrets in this file, which is no longer a Rails default
 # config/secrets.yml
@@ -40,14 +40,14 @@ config/master.key
 .env
 
 ## Environment normalization:
-/.bundle
-/vendor/bundle
+backend/.bundle
+backend/vendor/bundle
 
 # these should all be checked in to normalize the environment:
 # Gemfile.lock, .ruby-version, .ruby-gemset
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
-.rvmrc
+backend/.rvmrc
 
 # if using bower-rails ignore default bower_components path bower.json files
 /vendor/assets/bower_components
@@ -58,7 +58,7 @@ bower.json
 .powenv
 
 # Ignore Byebug command history file.
-.byebug_history
+backend/.byebug_history
 
 # Ignore node_modules
 node_modules/
@@ -74,8 +74,8 @@ yarn-debug.log*
 .yarn-integrity
 
 # Ignore uploaded files in development
-/storage/*
-!/storage/.keep
+backend/storage/*
+!backend/storage/.keep
 
 ### Ruby ###
 *.gem
@@ -132,8 +132,8 @@ build-iPhoneSimulator/
 ### Vuejs ###
 # Recommended template: Node.gitignore
 
-dist/
-npm-debug.log
-yarn-error.log
+client/dist/
+client/npm-debug.log
+client/yarn-error.log
 
 # End of https://www.gitignore.io/api/code,ruby,vuejs,rails

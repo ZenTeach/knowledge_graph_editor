@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  app:
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - "./backend:/app"
+    ports:
+      - 3100:3000
+    environment:
+      - NEO4J_TEST_URL=http://neo4j:neo4j@localhost:7475
+      - NEO4J_URL=http://neo4j:neo4j@localhost:7475
+    depends_on:
+      - neo4j_db
+
+  neo4j_db:
+    image: neo4j
+    ports:
+      - 7474:7474
+      - 7475:7475

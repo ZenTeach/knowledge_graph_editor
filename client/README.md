@@ -1,4 +1,6 @@
 # client
+## Yarn installation
+``` npm i -g yarn```
 
 ## Project setup
 ```

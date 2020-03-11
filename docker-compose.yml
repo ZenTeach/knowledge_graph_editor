@@ -14,20 +14,6 @@ services:
     env_file:
       - './client/.env.development'
     depends_on:
-      - zenteach_be
-  app:
-    restart: always
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    volumes:
-      - "./backend:/app"
-    ports:
-      - 3100:3000
-    environment:
-      - NEO4J_TEST_URL=http://neo4j:neo4j@localhost:7475
-      - NEO4J_URL=http://neo4j:neo4j@localhost:7475
-    depends_on:
       - neo4j_db
 
   neo4j_db:

@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-
+import Home from "@/views/Home.vue";
+import store from "@/store";
 Vue.use(VueRouter);
 
 const routes = [
@@ -25,7 +25,6 @@ const router = new VueRouter({
   routes
 });
 
-
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (store.state.app.loggedIn) {
@@ -36,7 +35,5 @@ router.beforeEach((to, from, next) => {
   }
   next();
 });
-
-
 
 export default router;

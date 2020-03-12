@@ -1,14 +1,22 @@
 import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import { sync } from "vuex-router-sync";
+import VueCookies from "vue-cookies";
+import VueD3 from "vue-d3";
+import "@/plugins";
+import App from "@/App.vue";
+import router from "@/router";
+import store from "@/store";
 
+Vue.config.productionTip = true;
+Vue.use(VueCookies);
+Vue.use(VueD3);
 
-Vue.config.productionTip = false;
+const unsync = sync(store, router);
 
-
-new Vue({
+var vm = new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount("#app");
+window._vm = vm;
+unsync();

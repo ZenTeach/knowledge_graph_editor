@@ -27,6 +27,7 @@
     "lodash": "^4.17.15",
     "method-override": "^3.0.0",
     "neode": "^0.4.2",
+    "sigma": "^2.0.0-alpha32",
     "vue": "^2.6.11",
     "vue-apollo": "^3.0.3",
     "vue-cookies": "^1.7.0",

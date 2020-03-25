@@ -1,5 +1,14 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <sigma-test-component />
 </template>
+
+<script>
+import SigmaTestComponent from "@/components/SigmaTestComponent.vue";
+
+export default {
+  name: "About",
+  components: {
+    SigmaTestComponent
+  }
+};
+</script>

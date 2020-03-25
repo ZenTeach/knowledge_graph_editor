@@ -4533,7 +4533,7 @@ eventemitter3@^4.0.0:
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-4.0.0.tgz#d65176163887ee59f386d64c82610b696a4a74eb"
   integrity sha512-qerSRB0p+UDEssxTtm6EDKcE7W4OaoisfIMl4CngyEhjpYglocpNg6UEqCvemdGhosAsg4sO2dXJOdyBifPGCg==
 
-events@^3.0.0:
+events@^3.0.0, events@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/events/-/events-3.1.0.tgz#84279af1b34cb75aa88bf5ff291f6d0bd9b31a59"
   integrity sha512-Rv+u8MLHNOdMjTAFeT3nCjHn2aGlx435FP/sDHNaRhDEMwyI/aB22Kj2qIN8R0cw3z28psEQLYwxVKLsKrMgWg==
@@ -5195,6 +5195,15 @@ graphology-indices@^0.2.1:
     graphology-utils "^1.7.0"
     mnemonist "^0.32.0"
 
+graphology-layout@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/graphology-layout/-/graphology-layout-0.2.0.tgz#c26d974b3ee0845a7121543a604326166b778195"
+  integrity sha512-wrdUYQGs3P4L4f/VLYe4OkDSookWyrCOFGYM1ZWug99kgagYBFhfo/cZyiook153siMQaKmuuEH+iauZEy+GbQ==
+  dependencies:
+    graphology-types "^0.15.3"
+    graphology-utils "^1.6.0"
+    lodash "^4.17.15"
+
 graphology-metrics@1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/graphology-metrics/-/graphology-metrics-1.6.1.tgz#a2333ce4a8c90a2903a2deafcfb42cf6681c6f85"
@@ -5215,7 +5224,7 @@ graphology-shortest-path@^1.0.1:
     graphology-utils "^1.7.0"
     mnemonist "^0.33.1"
 
-graphology-types@^0.15.1:
+graphology-types@^0.15.1, graphology-types@^0.15.3:
   version "0.15.5"
   resolved "https://registry.yarnpkg.com/graphology-types/-/graphology-types-0.15.5.tgz#d6b3618f974c8f882b0a779f7ec68a2f1106c2d2"
   integrity sha512-2NONgcQ0KmzMoiLAOkk4AkyhrQsA4dfJKyGOMYUfz2sNBAR/VK3oPcalCg3ID7zDd4XSqE3rMtEt+G3KcUaLew==
@@ -5225,12 +5234,21 @@ graphology-types@^0.16.0:
   resolved "https://registry.yarnpkg.com/graphology-types/-/graphology-types-0.16.0.tgz#37896c4c82117a247c97a16219629215f1a596b4"
   integrity sha512-iBGyPuMHlmHdXaB0cu/vllkPJ3myf063ZICY90zDxYQrJYZ3Dm4h2+dLM3Kof+CVJzM4HGg96ZFZ8HS6C7LgCQ==
 
-graphology-utils@^1.3.1, graphology-utils@^1.4.0, graphology-utils@^1.7.0:
+graphology-utils@^1.3.1, graphology-utils@^1.4.0, graphology-utils@^1.6.0, graphology-utils@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/graphology-utils/-/graphology-utils-1.7.0.tgz#0541855ffd0e5c011fd2b9f961b769bac23845b6"
   integrity sha512-g94E5O1FTws4E81AVKnCmxinDN1KRO7Zpysqd/j7Xjy2Qjs7DOnB3XHZUaS/Yk6D74LorBp7NJY5685IEkAh6g==
   dependencies:
     graphology-types "^0.15.1"
+
+graphology@^0.16.1:
+  version "0.16.1"
+  resolved "https://registry.yarnpkg.com/graphology/-/graphology-0.16.1.tgz#1e7dcfa4cf19503513acfde7bcb16167d284bb56"
+  integrity sha512-1N4fNwR6vkU4Q5vRD2DiAC4bLKPHHJnsA3n0KYtQoL5MVQ+JURYzCIGrS8xcj9hq8ZyBoOFJxdm+VgO6v5lvig==
+  dependencies:
+    events "^3.1.0"
+    graphology-types "^0.16.0"
+    obliterator "^1.6.1"
 
 graphql-tag@^2.10.3:
   version "2.10.3"
@@ -5636,6 +5654,14 @@ import-local@^2.0.0:
   dependencies:
     pkg-dir "^3.0.0"
     resolve-cwd "^2.0.0"
+
+imports-loader@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/imports-loader/-/imports-loader-0.8.0.tgz#030ea51b8ca05977c40a3abfd9b4088fe0be9a69"
+  integrity sha512-kXWL7Scp8KQ4552ZcdVTeaQCZSLW+e6nJfp3cwUMB673T7Hr98Xjx5JK+ql7ADlJUvj1JS5O01RLbKoutN5QDQ==
+  dependencies:
+    loader-utils "^1.0.2"
+    source-map "^0.6.1"
 
 imurmurhash@^0.1.4:
   version "0.1.4"

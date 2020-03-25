@@ -5,17 +5,15 @@ module.exports = {
     },
     resolve: {
       alias: require("./aliases.config").webpack,
-      modules: [
-        'node_modules',
-      ],
+      modules: ["node_modules"]
     },
     module: {
       rules: [
         {
           test: /sigma.*/,
-          use: 'imports-loader?this=>window',
-        },
-      ],
+          use: "imports-loader?this=>window"
+        }
+      ]
     }
   }
 };

@@ -43,7 +43,7 @@ export default {
 
     const editor = document.getElementById("editor");
 
-    new WebGLRenderer(graph, editor);
+    new WebGLRenderer(graph, editor, {zIndex: true} );
   }
 };
 
@@ -53,7 +53,11 @@ export default {
 
 <style>
 #editor {
-  height: 100rem;
-  width: 100rem;
+  height: 70vh;
+  width: 80vw;
+  top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
 }
 </style>

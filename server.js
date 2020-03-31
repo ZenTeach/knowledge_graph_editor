@@ -10,6 +10,7 @@ const Neode = require("neode")
 const writeResponse = require("./server/helpers/response").writeResponse
 const seedKnowledgeItemNodes = require("./server/seeds").seedKnowledgeItemNodes
 const neo4jSessionCleanup = require("./server/middlewares/neo4jSessionCleanup");
+var cors = require('cors');
 dotenv.config();
 
 const api = express();
@@ -22,7 +23,8 @@ api.use(bodyParser.json());
 api.use(cookieParser());
 api.use(methodOverride());
 api.use(errorHandler());
-
+api.use(cors());
+api.options('*', cors())
 // CORS setting
 api.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

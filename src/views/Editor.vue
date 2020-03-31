@@ -5,7 +5,6 @@
 <script>
 import GraphEditorComponent from "@/components/GraphEditorComponent.vue";
 
-
 export default {
   name: "About",
   components: {

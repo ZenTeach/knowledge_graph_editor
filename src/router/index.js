@@ -4,7 +4,6 @@ import store from "@/store";
 Vue.use(VueRouter);
 
 const routes = [
-  
   {
     path: "/",
     name: "Editor",

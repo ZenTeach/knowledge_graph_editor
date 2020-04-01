@@ -3,52 +3,52 @@
 </template>
 
 <script>
-//import { WebGLRenderer } from "sigma";
-//import Graph from "graphology";
-//import { circular } from "graphology-layout";
+import { WebGLRenderer } from "sigma";
+import Graph from "graphology";
+import { circular } from "graphology-layout";
 import { api } from "@/plugins";
 
 export default {
   name: "GraphEditorComponent",
   mounted: async function() {
-    //const graph = new Graph();
     const response = await api.get("/api/knowledgeitems");
     const data = response.data;
+    var proccessData = [];
     data.forEach(element => {
-      console.log(element);
+      const { Label: value, Topic, Statement, ExamBoard } = element;
+
+      var hash = {
+        key: `KnowledgeItem ${element["ID"]}`,
+        attributes: {
+          label: `KnowledgeItem ${element["ID"]}`,
+          x: 1,
+          y: 1,
+          color: "#FF0",
+          size: 10,
+          value: value,
+          Topic: Topic,
+          Statement: Statement,
+          ExamBoard: ExamBoard
+        }
+      };
+      proccessData.push(hash);
     });
-    /**graph.addNode("John", {
-      label: "John",
-      x: 1,
-      y: 1,0
-      color: "#FF0",
-      size: 10
+    const graph = new Graph();
+    graph.import({
+      nodes: proccessData
     });
-    graph.addNode("Adam", {
-      label: "Adam",
-      x: 1,
-      y: 1,
-      color: "#FF0",
-      size: 10
-    });
-    graph.addNode("Sam", {
-      label: "Sam",
-      x: 1,
-      y: 1,
-      color: "#FF0",
-      size: 10
-    }); */
+
     //graph.addEdge("John", "Adam");
 
     //graph.addEdge("John", "Sam");
 
     //graph.addEdge("Sam", "Adam");
 
-    //circular.assign(graph);
+    circular.assign(graph);
 
-    //const editor = document.getElementById("editor");
+    const editor = document.getElementById("editor");
 
-    //new WebGLRenderer(graph, editor, {zIndex: true} );
+    new WebGLRenderer(graph, editor, { zIndex: true });
   }
 };
 </script>

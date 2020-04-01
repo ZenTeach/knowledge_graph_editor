@@ -48,7 +48,26 @@ export default {
 
     const editor = document.getElementById("editor");
 
-    new WebGLRenderer(graph, editor, { zIndex: true });
+    const renderer = new WebGLRenderer(graph, editor, { zIndex: true });
+    renderer.on("clickNode", ({ node, captor }) => {
+      console.log("Clicking:", node, captor);
+    });
+    renderer.on("clickStage", () => {
+      console.log("Clicking the stage.");
+      // TODO: Implement me
+      // 1. create temporary node
+      // 2. show the users a modal page -
+      // ask the user to edit/create node attributes step-by-step
+      // 3. "save"/"cancel" - "save": api call to create node
+      // & change node name to smtn else,
+      // "cancel" - delete node from graph
+      // graph.addNode('Temporary', {
+      // 	label: "Freshie",
+      // 	x: 1,
+      // 	y: 1,
+      // 	size: 20
+      // })
+    });
   }
 };
 </script>

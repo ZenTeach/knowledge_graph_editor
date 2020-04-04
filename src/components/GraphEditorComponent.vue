@@ -52,6 +52,12 @@ export default {
     renderer.on("clickNode", ({ node, captor }) => {
       console.log("Clicking:", node, captor);
     });
+    // Step by step
+    // 1. Parent (Editor.vue) container for GraphEditorComponent -> App.vue
+    // App -> Parent -> GraphEditor
+    // 2. canvas and add background image from draw.io
+    // 3. Parent -> router/index.js
+    // '/' -> Parent Component
     renderer.on("clickStage", () => {
       console.log("Clicking the stage.");
       // TODO: Implement me
@@ -74,8 +80,11 @@ export default {
 
 <style>
 #editor {
-  height: 70vh;
-  width: 80vw;
+  position:absolute;
+  padding: 2px 30px; 
+
+  height: 100%;
+  width: 100%;
   top: 0;
   bottom: 0;
   left: 0;

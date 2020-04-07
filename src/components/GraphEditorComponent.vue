@@ -1,10 +1,17 @@
 <template>
+<<<<<<< HEAD
   <div v-on:delete-node="deleteNodeFromGraph()">
     <div id="editor"></div>
     <vuetify-dialog-box-component
       :dialogController="dialogToggle"
       :nodeAttributes="nodeAttributeProps"
     />
+=======
+  <div id="editor">
+    <dialog open>
+  <p>Greetings, one and all!</p>
+</dialog>
+>>>>>>> b37c71b... create node on click
   </div>
 </template>
 
@@ -95,8 +102,25 @@ export default {
       };
       this.dialogToggle = true;
     });
+<<<<<<< HEAD
 
     this.eventBus.$on("delete-node", this.deleteNodeFromGraph);
+=======
+    var func = {
+      attribute: {
+        x: Math.random(),
+        y: Math.random(),
+        color: "#FF00",
+        size: 10
+      },
+      newNode:function() {
+        Date.now();
+        }
+      
+    };
+    
+
+>>>>>>> b37c71b... create node on click
     // Step by step
     // 1. Parent (Editor.vue) container for GraphEditorComponent -> App.vue
     // App -> Parent -> GraphEditor
@@ -104,6 +128,7 @@ export default {
     // 3. Parent -> router/index.js
     // '/' -> Parent Component
     renderer.on("clickStage", () => {
+      // console.log("Clicking the stage.");
       console.log("Clicking the stage.");
       // TODO: Implement me
       // 1. create temporary node
@@ -112,12 +137,7 @@ export default {
       // 3. "save"/"cancel" - "save": api call to create node
       // & change node name to smtn else,
       // "cancel" - delete node from graph
-      // graph.addNode('Temporary', {
-      // 	label: "Freshie",
-      // 	x: 1,
-      // 	y: 1,
-      // 	size: 20
-      // })
+     graph.addNode(`KnowledgeItem ${Date.now()}`,func.attribute);
     });
   },
   methods: {
@@ -130,8 +150,16 @@ export default {
 </script>
 
 <style>
+
 #editor {
   height: 100vh;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
   width: 100%;
   top: 0;
   bottom: 0;

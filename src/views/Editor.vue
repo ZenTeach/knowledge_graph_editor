@@ -1,6 +1,5 @@
 <template>
-  <div
-  >
+  <div>
     <div id="grid-container">
       <canvas id="grid"></canvas>
     </div>
@@ -15,7 +14,7 @@ export default {
   name: "About",
   components: {
     GraphEditorComponent
-  },
+  }
   // mounted: function() {
   //   var canvas = document.getElementById("grid");
   //   // w, h, window.innerWidth, window.innerHeight

@@ -1,6 +1,11 @@
 # Graph Editor View
+
+## Project dependencies
+- This project uses [nvm](https://github.com/nvm-sh/nvm) to install different versions. If your OS is windows, use the windows installer for using [chocolatey](https://chocolatey.org), which is a package manager for windows. Nvm can be found [here](https://chocolatey.org/packages?q=nvm).
+
 ## Yarn installation
-``` npm i -g yarn ```
+``` npm i -g yarn
+```
 
 ## Configuration
 Create a file named `.env` in the project directory and add the following snippet.
@@ -14,22 +19,28 @@ NEO4J_PORT=7687
 NEO4J_DATABASE=neo4j
 NEO4J_ENCRYPTION=ENCRYPTION_OFF
 SERVER_PORT=3001
+VUE_APP_API_ENDPOINT=http://localhost:3001
 ```
 ## Project setup
 
-``` yarn install ```
+``` yarn install
+```
 
 ### Compiles and hot-reloads for development
-``` yarn serve ```
+``` yarn serve
+```
 
 ### Compiles and minifies for production
-``` yarn build ```
+``` yarn build
+```
 
 ### Run your unit tests
-``` yarn test:unit ```
+``` yarn test:unit
+```
 
 ### Lints and fixes files
-``` yarn lint ```
+``` yarn lint
+```
 
 ## Project Structure
 
@@ -51,15 +62,13 @@ src
 │   └── index.js
 └── views
     └── Home.vue
-
-
 ```
 
 This project follows the structure mentioned above where each folder serves a specific purpose, which is outlined below:
 
-- ```assets```: this folder hosts all static assets (images, favicons, style files, pdfs) that are used in by the framework.
+- ``` assets ```: this folder hosts all static assets (images, favicons, style files, pdfs) that are used in by the framework.
 
-- ```components```: this folder hosts web components that are renders in views later on. 
+- ```components```: this folder hosts web components that are renders in views later on.
 
 - ```plugins```: this folder contains initialization of certain plugins and libraries outside of vue.js toolchain.
 

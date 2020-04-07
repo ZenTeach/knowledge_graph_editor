@@ -80,14 +80,13 @@ export default {
 
 <style>
 #editor {
-  position:absolute;
-  padding: 2px 30px; 
-
-  height: 100%;
+  height: 100vh;
   width: 100%;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  display: flex;
+  justify-content: center;
 }
 </style>

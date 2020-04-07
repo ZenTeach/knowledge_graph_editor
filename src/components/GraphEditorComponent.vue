@@ -1,5 +1,9 @@
 <template>
-  <div id="editor"></div>
+  <div id="editor">
+    <dialog open>
+  <p>Greetings, one and all!</p>
+</dialog>
+  </div>
 </template>
 
 <script>
@@ -52,6 +56,20 @@ export default {
     renderer.on("clickNode", ({ node, captor }) => {
       console.log("Clicking:", node, captor);
     });
+    var func = {
+      attribute: {
+        x: Math.random(),
+        y: Math.random(),
+        color: "#FF00",
+        size: 10
+      },
+      newNode:function() {
+        Date.now();
+        }
+      
+    };
+    
+
     // Step by step
     // 1. Parent (Editor.vue) container for GraphEditorComponent -> App.vue
     // App -> Parent -> GraphEditor
@@ -59,6 +77,7 @@ export default {
     // 3. Parent -> router/index.js
     // '/' -> Parent Component
     renderer.on("clickStage", () => {
+      // console.log("Clicking the stage.");
       console.log("Clicking the stage.");
       // TODO: Implement me
       // 1. create temporary node
@@ -67,20 +86,23 @@ export default {
       // 3. "save"/"cancel" - "save": api call to create node
       // & change node name to smtn else,
       // "cancel" - delete node from graph
-      // graph.addNode('Temporary', {
-      // 	label: "Freshie",
-      // 	x: 1,
-      // 	y: 1,
-      // 	size: 20
-      // })
+     graph.addNode(`KnowledgeItem ${Date.now()}`,func.attribute);
     });
   }
 };
 </script>
 
 <style>
+
 #editor {
   height: 100vh;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
   width: 100%;
   top: 0;
   bottom: 0;

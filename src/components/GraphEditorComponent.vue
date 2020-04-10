@@ -1,8 +1,8 @@
 <template>
-  <div id="editor">
-    <dialog open>
-  <p>Greetings, one and all!</p>
-</dialog>
+  <div>
+    <div id="editor"></div>
+
+    <dialog-box v-if="exampleDialog"/>
   </div>
 </template>
 
@@ -11,10 +11,28 @@ import { WebGLRenderer } from "sigma";
 import Graph from "graphology";
 import { circular } from "graphology-layout";
 import { api } from "@/plugins";
+import DialogBox from "@/components/DialogBoxComponent.vue";
 
 export default {
   name: "GraphEditorComponent",
+  // declare component -> DialogBoxComponent
+  components: {
+    DialogBox
+  },
+  data: function() {
+    return {
+      exampleDialog: false,
+      tempNode: {},
+      message1: '',
+      message2: '',
+      message3: '',
+      message4: '',
+      greet:"Hello Saahil, it works"
+    };
+  },
   mounted: async function() {
+   // const NewAttributes = await api.put("/api/graph/node");
+    
     const response = await api.get("/api/knowledgeitems");
     const data = response.data;
     var proccessData = [];
@@ -56,19 +74,24 @@ export default {
     renderer.on("clickNode", ({ node, captor }) => {
       console.log("Clicking:", node, captor);
     });
-    var func = {
-      attribute: {
-        x: Math.random(),
-        y: Math.random(),
-        color: "#FF00",
-        size: 10
-      },
-      newNode:function() {
-        Date.now();
-        }
-      
-    };
-    
+    // var func = {
+    //   attribute: {
+    //     x: Math.random(),
+    //     y: Math.random(),
+    //     color: "#FF00",
+    //     size: 10
+    //   },
+    //   newNode:function() {
+    //     Date.now();
+    //     }
+
+    // };
+
+    // !!!
+    // create component for dialog
+    // edit attributes
+    // Save -> create api post call then close dialog
+    // Cancel -> close dialog and delete the node!
 
     // Step by step
     // 1. Parent (Editor.vue) container for GraphEditorComponent -> App.vue
@@ -76,8 +99,11 @@ export default {
     // 2. canvas and add background image from draw.io
     // 3. Parent -> router/index.js
     // '/' -> Parent Component
+    // v-if: if true, display component, if not hide.
     renderer.on("clickStage", () => {
-      // console.log("Clicking the stage.");
+      //console.log(event);
+      let randx = Math.random();
+      let randy = Math.random();
       console.log("Clicking the stage.");
       // TODO: Implement me
       // 1. create temporary node
@@ -86,14 +112,20 @@ export default {
       // 3. "save"/"cancel" - "save": api call to create node
       // & change node name to smtn else,
       // "cancel" - delete node from graph
-     graph.addNode(`KnowledgeItem ${Date.now()}`,func.attribute);
+      // TODO: Do not create nodes randomly!
+      this.exampleDialog = true;
+      graph.addNode(`KnowledgeItem ${Date.now()}`, {
+        x: randx,
+        y: randy,
+        color: "#FF00",
+        size: 10
+      });
     });
   }
 };
 </script>
 
 <style>
-
 #editor {
   height: 100vh;
   width: 100%;

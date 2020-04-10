@@ -1,17 +1,10 @@
 <template>
-<<<<<<< HEAD
   <div v-on:delete-node="deleteNodeFromGraph()">
     <div id="editor"></div>
     <vuetify-dialog-box-component
       :dialogController="dialogToggle"
       :nodeAttributes="nodeAttributeProps"
     />
-=======
-  <div id="editor">
-    <dialog open>
-  <p>Greetings, one and all!</p>
-</dialog>
->>>>>>> b37c71b... create node on click
   </div>
 </template>
 
@@ -43,6 +36,8 @@ export default {
     };
   },
   mounted: async function() {
+   // const NewAttributes = await api.put("/api/graph/node");
+
     const response = await api.get("/api/knowledgeitems");
     const data = response.data;
     var proccessData = [];
@@ -102,10 +97,8 @@ export default {
       };
       this.dialogToggle = true;
     });
-<<<<<<< HEAD
 
     this.eventBus.$on("delete-node", this.deleteNodeFromGraph);
-=======
     var func = {
       attribute: {
         x: Math.random(),
@@ -113,22 +106,22 @@ export default {
         color: "#FF00",
         size: 10
       },
-      newNode:function() {
+      newNode: function() {
         Date.now();
-        }
-      
+      }
     };
-    
 
->>>>>>> b37c71b... create node on click
     // Step by step
     // 1. Parent (Editor.vue) container for GraphEditorComponent -> App.vue
     // App -> Parent -> GraphEditor
     // 2. canvas and add background image from draw.io
     // 3. Parent -> router/index.js
     // '/' -> Parent Component
+    // v-if: if true, display component, if not hide.
     renderer.on("clickStage", () => {
-      // console.log("Clicking the stage.");
+      //console.log(event);
+      // let randx = Math.random();
+      // let randy = Math.random();
       console.log("Clicking the stage.");
       // TODO: Implement me
       // 1. create temporary node
@@ -137,7 +130,7 @@ export default {
       // 3. "save"/"cancel" - "save": api call to create node
       // & change node name to smtn else,
       // "cancel" - delete node from graph
-     graph.addNode(`KnowledgeItem ${Date.now()}`,func.attribute);
+      this.graph.addNode(`KnowledgeItem ${Date.now()}`, func.attribute);
     });
   },
   methods: {
@@ -150,7 +143,6 @@ export default {
 </script>
 
 <style>
-
 #editor {
   height: 100vh;
   width: 100%;

@@ -56,7 +56,7 @@ api.get("/", function(req, res) {
   res.send("Hello World");
 });
 
-api.use('/api/v1', require('./server/routes/knowledge_item')(neodeInstance));
+api.use('/api/v1', require('./server/routes').knowledge_items(neodeInstance));
 
 api.listen(process.env.SERVER_PORT, "localhost", () => {
   console.log(`[ OK ] Listening on port ${process.env.SERVER_PORT}`);

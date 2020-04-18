@@ -7,9 +7,18 @@ import { WebGLRenderer } from "sigma";
 import Graph from "graphology";
 import { circular } from "graphology-layout";
 import { api } from "@/plugins";
-
+import VuetifyDialogBoxComponent from "@/components/VuetifyDialogBoxComponent.vue";
 export default {
-  name: "GraphEditorComponent",
+ name: "GraphEditorComponent",
+    components: {
+    VuetifyDialogBoxComponent
+  },
+    data: function() {
+    return {
+      tempNode: {},
+
+    };
+  },
   mounted: async function() {
     const response = await api.get("/api/knowledgeitems");
     const data = response.data;

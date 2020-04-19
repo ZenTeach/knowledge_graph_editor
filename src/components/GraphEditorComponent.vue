@@ -1,5 +1,11 @@
 <template>
-  <div id="editor"></div>
+  <div>
+    <div id="editor"></div>
+    <vuetify-dialog-box-component
+      :dialogController="dialogToggle"
+      :nodeAttributes="nodeAttributeProps"
+    />
+  </div>
 </template>
 
 <script>
@@ -7,20 +13,32 @@ import { WebGLRenderer } from "sigma";
 import Graph from "graphology";
 import { circular } from "graphology-layout";
 import { api } from "@/plugins";
+import VuetifyDialogBoxComponent from "@/components/VuetifyDialogBoxComponent.vue";
 
 export default {
   name: "GraphEditorComponent",
+  components: {
+    VuetifyDialogBoxComponent
+  },
+  data: function() {
+    return {
+      tempNode: {},
+      dialogToggle: false,
+      nodeAttributeProps: {}
+    };
+  },
   mounted: async function() {
     const response = await api.get("/api/knowledgeitems");
     const data = response.data;
     var proccessData = [];
     data.forEach(element => {
-      const { Label: value, Topic, Statement, ExamBoard } = element;
+      const { _id: id, Label: value, Topic, Statement, ExamBoard } = element;
 
       var hash = {
         key: `KnowledgeItem ${element["ID"]}`,
         attributes: {
           label: `KnowledgeItem ${element["ID"]}`,
+          id: id,
           x: 1,
           y: 1,
           color: "#FF0",
@@ -49,9 +67,26 @@ export default {
     const editor = document.getElementById("editor");
 
     const renderer = new WebGLRenderer(graph, editor, { zIndex: true });
-    renderer.on("clickNode", ({ node, captor }) => {
-      console.log("Clicking:", node, captor);
+    renderer.on("clickNode", ({ node }) => {
+      const {
+        id,
+        label,
+        value,
+        Statement,
+        Topic,
+        ExamBoard
+      } = graph.getNodeAttributes(node);
+      this.nodeAttributeProps = {
+        id: id,
+        label: label,
+        value: value,
+        statement: Statement,
+        topic: Topic,
+        examboard: ExamBoard
+      };
+      this.dialogToggle = true;
     });
+
     // Step by step
     // 1. Parent (Editor.vue) container for GraphEditorComponent -> App.vue
     // App -> Parent -> GraphEditor

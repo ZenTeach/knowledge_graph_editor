@@ -77,7 +77,7 @@
 
 <script>
 export default {
-  name: "VuetifyDialogBoxComponent",
+  name: "EditDialogBoxComponent",
   props: {
     dialogController: {
       type: Boolean,

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-on:delete-node="deleteNodeFromGraph()">
     <div id="editor"></div>
     <vuetify-dialog-box-component
       :dialogController="dialogToggle"
@@ -10,6 +10,7 @@
 
 <script>
 import { WebGLRenderer } from "sigma";
+import Vue from "vue";
 import Graph from "graphology";
 import { circular } from "graphology-layout";
 import { api } from "@/plugins";
@@ -24,7 +25,14 @@ export default {
     return {
       tempNode: {},
       dialogToggle: false,
-      nodeAttributeProps: {}
+      nodeAttributeProps: {},
+      graph: {},
+      eventBus: new Vue()
+    };
+  },
+  provide() {
+    return {
+      eventBus: this.eventBus
     };
   },
   mounted: async function() {
@@ -51,8 +59,8 @@ export default {
       };
       proccessData.push(hash);
     });
-    const graph = new Graph();
-    graph.import({
+    this.graph = new Graph();
+    this.graph.import({
       nodes: proccessData
     });
 
@@ -62,11 +70,11 @@ export default {
 
     //graph.addEdge("Sam", "Adam");
 
-    circular.assign(graph);
+    circular.assign(this.graph);
 
     const editor = document.getElementById("editor");
 
-    const renderer = new WebGLRenderer(graph, editor, { zIndex: true });
+    const renderer = new WebGLRenderer(this.graph, editor, { zIndex: true });
     renderer.on("clickNode", ({ node }) => {
       const {
         id,
@@ -75,7 +83,8 @@ export default {
         Statement,
         Topic,
         ExamBoard
-      } = graph.getNodeAttributes(node);
+      } = this.graph.getNodeAttributes(node);
+
       this.nodeAttributeProps = {
         id: id,
         label: label,
@@ -87,6 +96,7 @@ export default {
       this.dialogToggle = true;
     });
 
+    this.eventBus.$on("delete-node", this.deleteNodeFromGraph);
     // Step by step
     // 1. Parent (Editor.vue) container for GraphEditorComponent -> App.vue
     // App -> Parent -> GraphEditor
@@ -109,6 +119,12 @@ export default {
       // 	size: 20
       // })
     });
+  },
+  methods: {
+    deleteNodeFromGraph(data) {
+      this.graph.dropNode(data);
+      this.dialogToggle = false;
+    }
   }
 };
 </script>

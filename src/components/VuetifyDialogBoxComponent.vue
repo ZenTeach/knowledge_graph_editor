@@ -43,6 +43,9 @@
         </v-container>
       </v-card-text>
       <v-card-actions>
+        <v-btn depressed dark small @click.stop="confirmDeleteDialog = true"
+          >Delete node</v-btn
+        >
         <v-spacer></v-spacer>
         <v-btn color="blue darken-1" text @click.stop="closeDialogBox()"
           >Close</v-btn
@@ -50,6 +53,25 @@
         <v-btn color="blue darken-1" text @click="submit()">Save</v-btn>
       </v-card-actions>
     </v-card>
+
+    <v-dialog
+      v-model="confirmDeleteDialog"
+      class="override_defaults"
+      max-width="300px"
+    >
+      <v-card>
+        <v-card-title>
+          <span class="headline">
+            Are you sure you want to delete this node?
+          </span></v-card-title
+        >
+        <v-card-actions>
+          <v-btn @click.stop="deleteNode()">Confirm</v-btn>
+          <v-spacer></v-spacer>
+          <v-btn @click.stop="confirmDeleteDialog = false">Cancel</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-dialog>
 </template>
 
@@ -64,6 +86,7 @@ export default {
     },
     nodeAttributes: Object
   },
+  inject: ["eventBus"],
   computed: {
     dialog() {
       return this.dialogController;
@@ -73,7 +96,8 @@ export default {
     value: "",
     topic: "",
     statement: "",
-    examboard: ""
+    examboard: "",
+    confirmDeleteDialog: false
   }),
   methods: {
     submit() {
@@ -89,7 +113,6 @@ export default {
       // api.put(`/api/v1/knowledgeitem/${this.nodeAttributes.id}`, payload);
     },
     clear() {
-      // this.$v.$reset()
       this.value = "";
       this.topic = "";
       this.statement = "";
@@ -97,6 +120,13 @@ export default {
     },
     closeDialogBox() {
       this.$refs.EditDialogBox.value = false;
+    },
+    deleteNode() {
+      // remove from graph instance
+      this.eventBus.$emit("delete-node", this.nodeAttributes.label);
+      this.confirmDeleteDialog = false;
+      // remove from db, api call
+      // api.delete(`/api/v1/knowledgeitem/${this.nodeAttributes.id}`);
     }
   }
 };

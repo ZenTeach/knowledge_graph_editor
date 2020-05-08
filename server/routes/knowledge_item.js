@@ -54,6 +54,9 @@ module.exports = function(neode) {
       .then(result => {
         return result.toJson();
       })
+      .then(json => {
+        writeResponse(res, json);
+      })
       .catch(e => {
         console.log(e);
         writeError(res, e);
@@ -215,19 +218,10 @@ module.exports = function(neode) {
     }
 
     let updateObj = _.fromPairs(_.entries(req.body));
-    // var updateObj = {
-    //   label: _.get(req.body, "label", ""),
-    //   topic: _.get(req.body, "topic", ""),
-    //   statement: _.get(req.body, "statement", ""),
-    //   examboard: _.get(req.body, "examboard", "")
-    // };
     neode
       .findById("KnowledgeItem", _.toInteger(req.params.id))
       .then(data => {
-        console.log(data);
         let node = data;
-        console.log("Request body", req.body);
-        console.log(updateObj);
         try {
           node.update(updateObj);
           writeResponse(
@@ -296,6 +290,5 @@ module.exports = function(neode) {
       })
       .catch(next);
   });
-
   return router;
 };

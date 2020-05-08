@@ -1,18 +1,18 @@
 module.exports = {
-  ID: {
+  id: {
     type: "number",
     primary: true
   },
-  Label: "string",
-  Topic: "string",
-  Statement: {
+  label: "string",
+  topic: "string",
+  statement: {
     type: "string",
     optional: true,
     allow: [""]
     // empty: true,
     // required: false
   },
-  ExamBoard: {
+  examboard: {
     type: "string",
     // empty: true,
     optional: true,
@@ -20,12 +20,13 @@ module.exports = {
     // required: false,
   },
   relates_to: {
-    type: "relationship",
-    target: "KnowledgeItem",
+    type: "relationships",
+    // target: "KnowledgeItem",
     relationship: "RELTYPE",
-    // direction: 'out',
+    direction: "both",
     properties: {
-      Type: "string"
-    }
+      type: "string"
+    },
+    eager: true
   }
 };

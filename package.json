@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "concurrently \"node server.js\"  \"vue-cli-service serve\"",
+    "serve": "concurrently \"nodemon server.js\"  \"vue-cli-service serve\"",
     "build": "vue-cli-service build",
     "server:run": "node server.js",
     "test:unit": "vue-cli-service test:unit",

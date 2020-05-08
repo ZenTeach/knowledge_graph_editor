@@ -48,7 +48,7 @@ const neodeInstance = new Neode(
 );
 
 neodeInstance.withDirectory(__dirname + '/server/models')
-seedKnowledgeItemNodes(neodeInstance)
+// seedKnowledgeItemNodes(neodeInstance)
 
 api.use(neo4jSessionCleanup);
 

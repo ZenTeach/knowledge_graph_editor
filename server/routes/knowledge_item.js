@@ -40,7 +40,7 @@ module.exports = function(neode) {
    *           items:
    *             $ref: '#/definitions/KnowledgeItem'
    */
-  router.get("/knowledgeitems", (req, res, _next) => {
+  router.get("/knowledgeitems", (req, res) => {
     const order_by = req.query.order || "Label";
     const sort = req.query.sort || "ASC";
     const limit = req.query.limit || 10;
@@ -54,10 +54,8 @@ module.exports = function(neode) {
       .then(result => {
         return result.toJson();
       })
-      .then(json => {
-        writeResponse(res, json);
-      })
       .catch(e => {
+        console.log(e);
         writeError(res, e);
       });
   });
@@ -90,7 +88,7 @@ module.exports = function(neode) {
    *       404:
    *         description: knowledge item not found
    */
-  router.get("/knowledgeitem/:id", (req, res, next) => {
+  router.get("/knowledgeitem/:id", (req, res) => {
     if (!req.params.id) {
       throw { message: "Invalid knowledge item id", status: 400 };
     }
@@ -141,7 +139,7 @@ module.exports = function(neode) {
    *       400:
    *         description: Error message(s)
    */
-  router.post("/knowledgeitem", (req, res, _next) => {
+  router.post("/knowledgeitem", (req, res) => {
     var label = _.get(req.body, "label");
     var topic = _.get(req.body, "topic");
     var statement = _.get(req.body, "statement");
@@ -207,7 +205,7 @@ module.exports = function(neode) {
    *       401:
    *         description: invalid / missing authentication
    */
-  router.put("/knowledgeitem/:id", (req, res, next) => {
+  router.put("/knowledgeitem/:id", (req, res) => {
     if (!req.params.id) {
       writeResponse(res, { message: "Invalid knowledge item id" }, 400);
     }

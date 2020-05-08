@@ -6,7 +6,7 @@ import "@/plugins";
 import App from "@/App.vue";
 import router from "@/router";
 import store from "@/store";
-
+import GraphologyBuilder from "../server/lib/graphology_builder";
 Vue.config.productionTip = true;
 Vue.use(VueCookies);
 Vue.use(VueD3);
@@ -20,3 +20,4 @@ var vm = new Vue({
 }).$mount("#app");
 window._vm = vm;
 unsync();
+Vue.prototype.$graphology_builder = GraphologyBuilder;

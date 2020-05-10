@@ -12,7 +12,6 @@
 <script>
 import { WebGLRenderer } from "sigma";
 import Vue from "vue";
-import Graph from "graphology";
 import { circular } from "graphology-layout";
 import { api } from "@/plugins";
 import EditDialogBoxComponent from "@/components/EditDialogBoxComponent.vue";
@@ -40,47 +39,27 @@ export default {
     };
   },
   mounted: async function() {
-    // const NewAttributes = await api.put("/api/graph/node");
-
-    const response = await api.get("/api/knowledgeitems");
+    const response = await api.get("/api/v1/knowledgeitems");
     const data = response.data;
-    var proccessData = [];
-    data.forEach(element => {
-      const { _id: id, Label: value, Topic, Statement, ExamBoard } = element;
-
-      var hash = {
-        key: `KnowledgeItem ${element["ID"]}`,
-        attributes: {
-          label: `KnowledgeItem ${element["ID"]}`,
-          id: id,
-          x: 1,
-          y: 1,
-          color: "#FF0",
-          size: 10,
-          value: value,
-          Topic: Topic,
-          Statement: Statement,
-          ExamBoard: ExamBoard
-        }
-      };
-      proccessData.push(hash);
-    });
-    this.graph = new Graph();
-    this.graph.import({
-      nodes: proccessData
+    let builder = new this.$graphology_builder(data);
+    builder.buildGraph(data);
+    let graph = builder.graph();
+    graph.forEachNode(node => {
+      graph.setNodeAttribute(node, "color", "#FF0");
+      graph.setNodeAttribute(node, "size", "10");
     });
 
-    //graph.addEdge("John", "Adam");
-
-    //graph.addEdge("John", "Sam");
-
-    //graph.addEdge("Sam", "Adam");
-
-    circular.assign(this.graph);
+    circular.assign(graph);
 
     const editor = document.getElementById("editor");
 
-    const renderer = new WebGLRenderer(this.graph, editor, { zIndex: true });
+    const renderer = new WebGLRenderer(graph, editor, {
+      defaultEdgeType: "arrow",
+      defaultEdgeColor: "#888",
+      renderEdgeLabels: true,
+      zIndex: true
+    });
+
     renderer.on("clickNode", ({ node }) => {
       const {
         id,
@@ -105,37 +84,9 @@ export default {
     this.eventBus.$on("delete-node", this.deleteNodeFromGraph);
     this.eventBus.$on("close-create-dialog-box", this.closeCreateDialogBox);
     this.eventBus.$on("submit-create-dialog-box", this.createNewNode);
-    // var func = {
-    //   attribute: {
-    //     x: Math.random(),
-    //     y: Math.random(),
-    //     color: "#FF00",
-    //     size: 10
-    //   },
-    //   newNode: function() {
-    //     Date.now();
-    //   }
-    // };
 
-    // Step by step
-    // 1. Parent (Editor.vue) container for GraphEditorComponent -> App.vue
-    // App -> Parent -> GraphEditor
-    // 2. canvas and add background image from draw.io
-    // 3. Parent -> router/index.js
-    // '/' -> Parent Component
-    // v-if: if true, display component, if not hide.
     renderer.on("clickStage", () => {
-      //console.log(event);
-      // let randx = Math.random();
-      // let randy = Math.random();
       console.log("Clicking the stage.");
-      // TODO: Implement me
-      // 1. create temporary node
-      // 2. show the users a modal page -
-      // ask the user to edit/create node attributes step-by-step
-      // 3. "save"/"cancel" - "save": api call to create node
-      // & change node name to smtn else,
-      // "cancel" - delete node from graph
       this.createDialogToggle = true;
       this.tempNode = this.graph.addNode(`KnowledgeItem ${Date.now()}`, {
         x: Math.random(),

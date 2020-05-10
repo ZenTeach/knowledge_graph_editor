@@ -9,7 +9,7 @@ exports.seedKnowledgeItemNodes = function(neodeInstance) {
     console.error(err);
   }
   // eslint-disable-next-line no-unused-vars
-  const { nodes, _edges } = data;
+  const { nodes, edges } = data;
   neodeInstance.deleteAll("KnowledgeItem").then(() => {
     console.log("Cleaned up dev database");
   });
@@ -20,32 +20,18 @@ exports.seedKnowledgeItemNodes = function(neodeInstance) {
       .catch(e => console.log("Error :(", e, e.details));
   });
 
-  //   edges.forEach(async edge => {
-  //     // do something
-  //     // find source node
-  //     try {
-  //       let sourceNode = await neodeInstance.first(
-  //         "KnowledgeItem",
-  //         "ID",
-  //         edge["Source"]
-  //       );
-  //       if (sourceNode) {
-  //         console.log("sourceNode is not found", edge["Source"]);
-  //         let targetNode = await neodeInstance.first(
-  //           "KnowledgeItem",
-  //           "ID",
-  //           edge["Target"]
-  //         );
-  //         if (targetNode) {
-  //           console.log("sourceNode is not found", edge["Source"]);
-  //           sourceNode.relatesTo(targetNode, "RELTYPE", {
-  //             Type: edge["Type"]
-  //           });
-  //         }
-  //       }
-  //     } catch (e) {
-  //       console.log("Error :(", e, e.details);
-  //     }
-  //     console.log(edge);
-  //   });
+  neodeInstance
+    .cypher(
+      "UNWIND $items as item MATCH (source: KnowledgeItem), (target: KnowledgeItem) WHERE source.id = toInteger(item.Source) AND target.id = toInteger(item.Target) CREATE (source)-[:RELTYPE {type:item.Type}]->(target)",
+      {
+        items: edges
+      }
+    )
+    .then(_res => {
+      console.log("Created relationship!");
+      // console.log(res.records.length);
+    })
+    .catch(e => {
+      console.log(e);
+    });
 };

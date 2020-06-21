@@ -1,10 +1,16 @@
 # Graph Editor View
 
 ## Project dependencies
-- This project uses [nvm](https://github.com/nvm-sh/nvm) to install different versions. If your OS is windows, use the windows installer for using [chocolatey](https://chocolatey.org), which is a package manager for windows. Nvm can be found [here](https://chocolatey.org/packages?q=nvm).
+
+### Neo4j
+The simplest way to install neo4j on your local machine is through the [neo4j Desktop app](https://neo4j.com/download/). It has an easy interface for setting up databases and adding plugins.
+
+### Node.js
+- This project uses [nvm](https://github.com/nvm-sh/nvm) to install different versions. If your OS is windows, use the windows installer by using [chocolatey](https://chocolatey.org), which is a package manager for windows. NVM can be found [here](https://chocolatey.org/packages?q=nvm).
 
 ## Yarn installation
-``` npm i -g yarn
+```bash
+npm i -g yarn
 ```
 
 ## Configuration
@@ -23,23 +29,28 @@ VUE_APP_API_ENDPOINT=http://localhost:3001
 ```
 ## Project setup
 
-``` yarn install
+```bash
+yarn install
 ```
 
 ### Compiles and hot-reloads for development
-``` yarn serve
+```bash
+yarn serve
 ```
 
 ### Compiles and minifies for production
-``` yarn build
+```bash
+yarn build
 ```
 
 ### Run your unit tests
-``` yarn test:unit
+```bash
+yarn test:unit
 ```
 
 ### Lints and fixes files
-``` yarn lint
+```bash
+yarn lint
 ```
 
 ## Project Structure

@@ -60,7 +60,7 @@ export default {
       zIndex: true
     });
 
-    renderer.on("clickNode", ({ node }) => {
+    renderer.on("rightClickNode", ({ node }) => {
       const {
         id,
         label,
